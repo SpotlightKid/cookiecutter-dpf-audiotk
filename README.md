@@ -32,13 +32,13 @@ the DPF sources have already been built.
 The Structure of a Plugin
 -------------------------
 
-ATK The ATK library provides a number of "filter" classes, which need to be
+The ATK library provides a number of "filter" classes, which need to be
 connected in a processing pipeline. Filters vary from simple operators like
 gain adjustment and panning, signal generators like LFOs and various actual
 audio filters for frequency spectrum manipulation. Each filter has a set of
-input and output ports that connect to each other. In you plugin, you feed the
+input and output ports that connect to each other. In your plugin, you feed the
 incoming sample data into the input ports of the ATK filter instances, which
-are at the front of the processing pipeline and write the data coming from the
+are at the front of the processing pipeline, and write the data coming from the
 output ports of the filter instances, which are at end of the processing
 pipeline, to the output buffers. ATK provides some utility classes, which take
 care of feeding the input to the processing pipeline and writing the output.
@@ -48,10 +48,11 @@ pipeline, which uses these, and in the plugin's `run` method calls the
 `process` method on the pipeline, which pumps the data through it. This means,
 for a simple pipeline, e.g. a delay or a filter, you just have to change the
 ATK filter class instance in the middle of the processing pipeline to one (or
-several in a row), which implements the processing you want and and update its
-(or their) parameters in the `setParametervalue` method. The project template
-sets up a simple pipeline for a stereo delay effect with two parameters (delay
-time and dry/wet ratio) as an example, that works out of the box.
+several in a row), which implement(s) the processing you want and and update
+its (their) parameters in the `setParametervalue` method. The project
+template sets up a simple pipeline for a stereo delay effect with two
+parameters (delay time and dry/wet ratio) as an example, that works out of the
+box.
 
 Please see the [ATK API reference](http://doc.audio-tk.com/) documentation for
 available filter classes and their parameters.

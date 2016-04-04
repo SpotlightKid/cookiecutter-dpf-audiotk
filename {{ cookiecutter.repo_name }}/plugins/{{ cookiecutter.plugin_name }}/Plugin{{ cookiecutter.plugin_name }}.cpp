@@ -54,14 +54,14 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
 
     switch (index) {
         case paramDelay:
-            parameter.name = "Delay";
+            parameter.name = "Delay Time (ms)";
             parameter.symbol = "delay";
             parameter.ranges.min = 0.1f;
             parameter.ranges.max = 500.0f;
             parameter.ranges.def = 1.0f;
             break;
         case paramBlend:
-            parameter.name = "DryWet";
+            parameter.name = "Dry/Wet";
             parameter.symbol = "blend";
             parameter.ranges.min = 0.0f;
             parameter.ranges.max = 100.0f;

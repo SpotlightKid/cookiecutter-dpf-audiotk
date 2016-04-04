@@ -68,8 +68,6 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
             parameter.ranges.def = 100.0f;
             break;
     }
-
-    parameter.symbol = parameter.name;
 }
 
 /**

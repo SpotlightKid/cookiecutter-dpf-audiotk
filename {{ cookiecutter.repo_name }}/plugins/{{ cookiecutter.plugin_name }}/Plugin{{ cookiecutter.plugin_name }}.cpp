@@ -23,13 +23,13 @@ START_NAMESPACE_DISTRHO
 
 Plugin{{ cookiecutter.plugin_name }}::Plugin{{ cookiecutter.plugin_name }}()
     : Plugin(paramCount, 1, 0),  // paramCount params, 1 program(s), 0 states
-      fSampleRate(getSampleRate()),
       inFilterL(nullptr, 1, 0, false),
       inFilterR(nullptr, 1, 0, false),
       delayFilter(96000),
       outFilterL(nullptr, 1, 0, false),
       outFilterR(nullptr, 1, 0, false)
 {
+    sampleRateChanged(getSampleRate());
     loadProgram(0);
 
     delayFilter.set_input_port(0, &inFilterL, 0);
@@ -88,6 +88,29 @@ void Plugin{{ cookiecutter.plugin_name }}::initProgramName(uint32_t index, Strin
 // Internal data
 
 /**
+  Optional callback to inform the plugin about a sample rate change.
+*/
+void Plugin{{ cookiecutter.plugin_name }}::sampleRateChanged(double newSampleRate) {
+    fSampleRate = newSampleRate;
+
+    if (fSampleRate != inFilterL.get_output_sampling_rate()) {
+        inFilterL.set_input_sampling_rate(fSampleRate);
+        inFilterL.set_output_sampling_rate(fSampleRate);
+        inFilterR.set_input_sampling_rate(fSampleRate);
+        inFilterR.set_output_sampling_rate(fSampleRate);
+        delayFilter.set_input_sampling_rate(fSampleRate);
+        delayFilter.set_output_sampling_rate(fSampleRate);
+        outFilterL.set_input_sampling_rate(fSampleRate);
+        outFilterL.set_output_sampling_rate(fSampleRate);
+        outFilterR.set_input_sampling_rate(fSampleRate);
+        outFilterR.set_output_sampling_rate(fSampleRate);
+        endPoint.set_input_sampling_rate(fSampleRate);
+        endPoint.set_output_sampling_rate(fSampleRate);
+    }
+}
+
+
+/**
   Get the current value of a parameter.
 */
 float Plugin{{ cookiecutter.plugin_name }}::getParameterValue(uint32_t index) const {
@@ -130,20 +153,6 @@ void Plugin{{ cookiecutter.plugin_name }}::loadProgram(uint32_t index) {
 // Process
 
 void Plugin{{ cookiecutter.plugin_name }}::activate() {
-    if (fSampleRate != inFilterL.get_output_sampling_rate()) {
-        inFilterL.set_input_sampling_rate(fSampleRate);
-        inFilterL.set_output_sampling_rate(fSampleRate);
-        inFilterR.set_input_sampling_rate(fSampleRate);
-        inFilterR.set_output_sampling_rate(fSampleRate);
-        delayFilter.set_input_sampling_rate(fSampleRate);
-        delayFilter.set_output_sampling_rate(fSampleRate);
-        outFilterL.set_input_sampling_rate(fSampleRate);
-        outFilterL.set_output_sampling_rate(fSampleRate);
-        outFilterR.set_input_sampling_rate(fSampleRate);
-        outFilterR.set_output_sampling_rate(fSampleRate);
-        endPoint.set_input_sampling_rate(fSampleRate);
-        endPoint.set_output_sampling_rate(fSampleRate);
-    }
 }
 
 void Plugin{{ cookiecutter.plugin_name }}::run(const float** inputs, float** outputs,

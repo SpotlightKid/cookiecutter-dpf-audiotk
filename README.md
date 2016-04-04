@@ -34,7 +34,7 @@ The Structure of a Plugin
 
 The ATK library provides a number of "filter" classes, which need to be
 connected in a processing pipeline. Filters vary from simple operators like
-gain adjustment and panning, signal generators like LFOs and various actual
+gain adjustment and panning, and signal generators like LFOs to various actual
 audio filters for frequency spectrum manipulation. Each filter has a set of
 input and output ports that connect to each other. In your plugin, you feed the
 incoming sample data into the input ports of the ATK filter instances, which

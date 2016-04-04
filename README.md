@@ -48,5 +48,5 @@ https://aur.archlinux.org/packages/audiotk-git/
 
 [cookiecutter]: https://github.com/audreyr/cookiecutter
 [DPF]: https://github.com/DISTRHO/DPF
-[AudioTK]: https://github.com/mbrucher/AudioTK
+[ATK]: https://github.com/mbrucher/AudioTK
 [installation instructions]: http://cookiecutter.readthedocs.org/en/latest/installation.html

@@ -10,7 +10,7 @@ Usage
 To create a DPF effect plugin using this template, install cookiecutter (see
 the [installation instructions]) and then run:
 
-    cookiecutter https://github.com/SpotlightKid/cookiecutter-dpf-effect
+    cookiecutter https://github.com/SpotlightKid/cookiecutter-dpf-audiotk
 
 and enter the plugin name and other info at the prompts.
 
